@@ -1,0 +1,75 @@
+/* Solmar Bay — HUD and menu styling. */
+html, body { margin: 0; height: 100%; overflow: hidden; background: #0e1a24;
+  font-family: "Trebuchet MS", "Segoe UI", Verdana, sans-serif; color: #fff; }
+#wrap { position: fixed; inset: 0; }
+#game { position: absolute; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
+.hidden { display: none !important; }
+#status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
+
+/* ---------- HUD ---------- */
+#hud { position: absolute; inset: 0; pointer-events: none; font-weight: bold; }
+#hud-top-left { position: absolute; top: 14px; left: 16px; text-shadow: 0 2px 4px rgba(0,0,0,.8); }
+.hud-label { font-size: 11px; letter-spacing: 2px; color: #ffd76a; }
+#health-bar { width: 190px; height: 12px; background: rgba(0,0,0,.55); border: 2px solid rgba(255,255,255,.75); border-radius: 3px; margin-top: 2px; }
+#health-fill { height: 100%; width: 100%; background: linear-gradient(90deg, #37d67a, #a5e34d); }
+#health-fill.low { background: linear-gradient(90deg, #e33, #f66); }
+#cash-row { margin-top: 6px; font-size: 24px; color: #7dff9b; }
+#ammo { font-size: 15px; color: #ffe9a8; margin-left: 12px; }
+#wanted-row { position: absolute; top: 12px; right: 18px; font-size: 30px; letter-spacing: 4px; color: #ffd23e;
+  text-shadow: 0 0 8px rgba(0,0,0,.9), 0 2px 3px rgba(0,0,0,.8); }
+#wanted-row .star-off { color: rgba(255,255,255,.28); text-shadow: none; }
+#objective { position: absolute; top: 14px; left: 50%; transform: translateX(-50%); text-align: center;
+  text-shadow: 0 2px 4px rgba(0,0,0,.9); max-width: 560px; }
+#objective-title { display: block; font-size: 13px; letter-spacing: 3px; color: #ffd76a; }
+#objective-text { display: block; font-size: 17px; margin-top: 2px; }
+#prompt { position: absolute; bottom: 128px; left: 50%; transform: translateX(-50%); font-size: 17px;
+  background: rgba(0,0,0,.55); padding: 6px 14px; border-radius: 6px; text-shadow: none; }
+#speedo { position: absolute; right: 20px; bottom: 216px; font-size: 40px; color: #fff;
+  text-shadow: 0 2px 6px rgba(0,0,0,.9); text-align: right; }
+#speedo .unit { font-size: 14px; color: #ffd76a; margin-left: 4px; }
+#minimap { position: absolute; right: 16px; bottom: 16px; border: 3px solid rgba(255,255,255,.85);
+  border-radius: 50%; background: #0d2733; box-shadow: 0 4px 14px rgba(0,0,0,.6); }
+#crosshair { position: absolute; left: 50%; top: 50%; transform: translate(-50%,-50%); font-size: 30px;
+  color: rgba(255,255,255,.9); text-shadow: 0 0 6px #000; }
+#toast { position: absolute; bottom: 210px; left: 50%; transform: translateX(-50%); font-size: 20px; color: #ffe9a8;
+  text-shadow: 0 2px 4px rgba(0,0,0,.9); opacity: 0; transition: opacity .3s; }
+#hint { position: absolute; left: 16px; bottom: 14px; font-size: 12px; font-weight: normal; color: rgba(255,255,255,.75);
+  text-shadow: 0 1px 3px rgba(0,0,0,.9); }
+
+/* ---------- Screens ---------- */
+.screen { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, rgba(8,20,32,.25) 0%, rgba(8,20,32,.72) 100%); pointer-events: auto; }
+.title-inner { text-align: center; text-shadow: 0 4px 18px rgba(0,0,0,.8); }
+.title-kicker { letter-spacing: 6px; font-size: 14px; color: #ffd76a; font-weight: bold; }
+.title-inner h1 { font-size: 96px; line-height: .92; margin: 10px 0 6px; letter-spacing: 4px;
+  background: linear-gradient(180deg, #fff6c9 20%, #ffb347 55%, #ff5e62 100%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+  filter: drop-shadow(0 4px 0 rgba(0,0,0,.45)); }
+.tagline { font-size: 20px; font-style: italic; color: #eaf6ff; margin: 4px 0 22px; }
+.title-buttons { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+.title-foot { margin-top: 26px; font-size: 14px; font-weight: normal; color: #d7e8f2; line-height: 1.5; }
+.panel { background: rgba(10, 26, 38, .92); border: 2px solid rgba(255, 215, 106, .55); border-radius: 12px;
+  padding: 26px 32px; max-width: 640px; width: 88%; box-shadow: 0 10px 40px rgba(0,0,0,.6); }
+.panel h2 { margin: 0 0 14px; letter-spacing: 3px; color: #ffd76a; font-size: 24px; }
+.panel ul { line-height: 1.9; font-size: 15px; font-weight: normal; padding-left: 20px; }
+.panel p { font-weight: normal; line-height: 1.6; }
+.btn { pointer-events: auto; cursor: pointer; font-family: inherit; font-weight: bold; font-size: 16px;
+  letter-spacing: 2px; color: #fff; background: rgba(255,255,255,.14); border: 2px solid rgba(255,255,255,.6);
+  border-radius: 8px; padding: 12px 26px; min-width: 260px; }
+.btn:hover { background: rgba(255,255,255,.28); }
+.btn.primary { background: linear-gradient(180deg, #ff9a3d, #ff5e62); border-color: #ffd76a; }
+.btn.primary:hover { filter: brightness(1.12); }
+.mission-item { display: flex; justify-content: space-between; gap: 14px; align-items: center;
+  border: 1px solid rgba(255,255,255,.25); border-radius: 8px; padding: 10px 14px; margin-bottom: 8px; }
+.mission-item .mi-name { font-size: 16px; }
+.mission-item .mi-desc { font-size: 13px; font-weight: normal; color: #cfe3ee; }
+.mission-item .mi-reward { color: #7dff9b; white-space: nowrap; }
+.mission-item.done .mi-name::after { content: "  ✓ DONE"; color: #7dff9b; font-size: 13px; }
+.mission-item button { min-width: 0; padding: 8px 16px; font-size: 13px; }
+
+/* ---------- Banner / end ---------- */
+#banner { position: absolute; left: 50%; top: 34%; transform: translate(-50%,-50%); text-align: center;
+  pointer-events: none; text-shadow: 0 4px 16px rgba(0,0,0,.9); }
+#banner-title { font-size: 54px; font-weight: bold; letter-spacing: 6px; color: #ffd76a; }
+#banner-sub { font-size: 20px; margin-top: 6px; }
+#end-title { font-size: 44px; }
