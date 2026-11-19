@@ -3,17 +3,104 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Block Dodger</title>
-<style>
-  html, body { margin: 0; height: 100%; overflow: hidden; background: #11141b; }
-  #game { position: fixed; inset: 0; width: 100%; height: 100%; display: block; touch-action: none; }
-  /* Read aloud, never shown: the status line screen readers announce. */
-  #status { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
-</style>
+<title>Solmar Bay — Open World Crime Game</title>
+<link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-<canvas id="game" aria-label="Block Dodger: move the paddle left and right to dodge falling blocks and catch coins"></canvas>
-<p id="status" role="status" aria-live="polite"></p>
-<script type="module" src="./src/main.js"></script>
+<div id="wrap">
+  <canvas id="game" aria-label="Solmar Bay: an open-world crime game. Drive, steal cars, outrun the police and run jobs for Vera Solano."></canvas>
+
+  <!-- In-game HUD -->
+  <div id="hud" class="hidden">
+    <div id="hud-top-left">
+      <div id="health-row"><span class="hud-label">HEALTH</span><div id="health-bar"><div id="health-fill"></div></div></div>
+      <div id="cash-row"><span id="cash">$0</span><span id="ammo"></span></div>
+    </div>
+    <div id="wanted-row" aria-label="Wanted level"></div>
+    <div id="objective"><span id="objective-title"></span><span id="objective-text"></span></div>
+    <div id="prompt"></div>
+    <div id="speedo" class="hidden"><span id="speed">0</span><span class="unit">mph</span></div>
+    <canvas id="minimap" width="190" height="190" aria-label="Minimap"></canvas>
+    <div id="crosshair" class="hidden">+</div>
+    <div id="toast"></div>
+    <div id="hint">WASD move &nbsp;·&nbsp; Mouse look &nbsp;·&nbsp; E enter car &nbsp;·&nbsp; Click shoot &nbsp;·&nbsp; F punch &nbsp;·&nbsp; M missions &nbsp;·&nbsp; Esc pause</div>
+  </div>
+
+  <!-- Title screen -->
+  <div id="title-screen" class="screen">
+    <div class="title-inner">
+      <div class="title-kicker">A SUN-SOAKED OPEN WORLD</div>
+      <h1>SOLMAR<br>BAY</h1>
+      <p class="tagline">Steal the car. Lose the cops. Get paid.</p>
+      <div class="title-buttons">
+        <button id="btn-continue" class="btn primary hidden">CONTINUE — $0</button>
+        <button id="btn-new" class="btn primary">NEW GAME</button>
+        <button id="btn-how" class="btn">HOW TO PLAY</button>
+      </div>
+      <p class="title-foot">Dario "Dax" Cruz is back in Solmar Bay. Vera Solano has work for him —<br>if the Bayfront police don't catch him first.</p>
+    </div>
+  </div>
+
+  <!-- How to play -->
+  <div id="how-screen" class="screen hidden">
+    <div class="panel">
+      <h2>HOW TO PLAY</h2>
+      <ul>
+        <li><b>W A S D</b> — move / drive &nbsp;·&nbsp; <b>Shift</b> — sprint &nbsp;·&nbsp; <b>Space</b> — jump / handbrake</li>
+        <li><b>Mouse</b> — drag to look around, click to shoot (when armed)</li>
+        <li><b>E</b> — steal / enter a car, exit a car &nbsp;·&nbsp; <b>F</b> — punch &nbsp;·&nbsp; <b>R</b> — reload</li>
+        <li><b>M</b> — jobs (missions) &nbsp;·&nbsp; <b>Esc / P</b> — pause</li>
+        <li>Crimes raise your <b>wanted level</b> — police cars chase you. Hide to cool off.</li>
+        <li>Finish jobs for Vera to earn cash. Find the 8 hidden green packages.</li>
+        <li>Progress saves automatically to this browser.</li>
+      </ul>
+      <button id="btn-how-back" class="btn primary">BACK</button>
+    </div>
+  </div>
+
+  <!-- Mission picker -->
+  <div id="mission-screen" class="screen hidden">
+    <div class="panel">
+      <h2>JOBS — VERA SOLANO</h2>
+      <div id="mission-list"></div>
+      <button id="btn-mission-close" class="btn primary">CLOSE</button>
+    </div>
+  </div>
+
+  <!-- Pause -->
+  <div id="pause-screen" class="screen hidden">
+    <div class="panel">
+      <h2>PAUSED</h2>
+      <p id="pause-stats"></p>
+      <button id="btn-resume" class="btn primary">RESUME</button>
+      <button id="btn-quit-title" class="btn">SAVE &amp; TITLE SCREEN</button>
+    </div>
+  </div>
+
+  <!-- Mission result / busted / wasted -->
+  <div id="banner" class="hidden"><div id="banner-title"></div><div id="banner-sub"></div></div>
+  <div id="end-screen" class="screen hidden">
+    <div class="panel">
+      <h2 id="end-title">BUSTED</h2>
+      <p id="end-text"></p>
+      <button id="btn-end-retry" class="btn primary">TRY AGAIN</button>
+      <button id="btn-end-title" class="btn">TITLE SCREEN</button>
+    </div>
+  </div>
+
+  <div id="status" role="status" aria-live="polite"></div>
+</div>
+<script src="./vendor/three.min.js"></script>
+<script src="./src/config.js"></script>
+<script src="./src/audio.js"></script>
+<script src="./src/input.js"></script>
+<script src="./src/city.js"></script>
+<script src="./src/vehicles.js"></script>
+<script src="./src/pedestrians.js"></script>
+<script src="./src/player.js"></script>
+<script src="./src/police.js"></script>
+<script src="./src/missions.js"></script>
+<script src="./src/hud.js"></script>
+<script src="./src/main.js"></script>
 </body>
 </html>
